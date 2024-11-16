@@ -7,15 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		C3F94D482C0406330051923E /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = C3F94D472C0406330051923E /* main.c */; };
+		948CB3262CE4B90D0024F5A6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 948CB3252CE4B2410024F5A6 /* main.m */; };
 		C3F94D562C0408930051923E /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = C3F94D542C0408930051923E /* LICENSE */; };
 		C3F94D572C0408930051923E /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = C3F94D552C0408930051923E /* README.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		948CB3252CE4B2410024F5A6 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		C3F94D3B2C0406320051923E /* DiscreteScroll.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DiscreteScroll.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C3F94D462C0406330051923E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		C3F94D472C0406330051923E /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
 		C3F94D542C0408930051923E /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		C3F94D552C0408930051923E /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -53,7 +53,7 @@
 			isa = PBXGroup;
 			children = (
 				C3F94D462C0406330051923E /* Info.plist */,
-				C3F94D472C0406330051923E /* main.c */,
+				948CB3252CE4B2410024F5A6 /* main.m */,
 			);
 			path = DiscreteScroll;
 			sourceTree = "<group>";
@@ -126,7 +126,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C3F94D482C0406330051923E /* main.c in Sources */,
+				948CB3262CE4B90D0024F5A6 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

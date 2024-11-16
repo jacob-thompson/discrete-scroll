@@ -1,3 +1,5 @@
+#import <Appkit/AppKit.h>
+
 #include <ApplicationServices/ApplicationServices.h>
 
 #define DEFAULT_LINES 3
@@ -8,10 +10,16 @@ static bool TRUSTED;
 
 static int LINES;
 
+static CFArrayRef EXCEPTIONS;
+
 static CGEventRef tapCallback(CGEventTapProxy proxy,
                               CGEventType type, CGEventRef event, void *userInfo)
 {
-    if (CGEventGetIntegerValueField(event, kCGScrollWheelEventIsContinuous) == 0) {
+    NSRunningApplication *focused = [[NSWorkspace sharedWorkspace] frontmostApplication];
+    CFRange range = CFRangeMake(0, CFArrayGetCount(EXCEPTIONS));
+    bool exceptFlag = CFArrayContainsValue(EXCEPTIONS, range, (__bridge const void *)(focused.localizedName));
+
+    if (CGEventGetIntegerValueField(event, kCGScrollWheelEventIsContinuous) == 0 && !exceptFlag) {
         int delta = (int)CGEventGetIntegerValueField(event, kCGScrollWheelEventPointDeltaAxis1);
         CGEventSetIntegerValueField(event, kCGScrollWheelEventDeltaAxis1, SIGN(delta) * LINES);
     }
@@ -42,6 +50,17 @@ static void notificationCallback(CFNotificationCenterRef center, void *observer,
                 CFRunLoopStop(runLoop);
         }
     );
+}
+
+static bool getExceptionApps(CFStringRef key)
+{
+    EXCEPTIONS = (CFArrayRef)CFPreferencesCopyAppValue(key, kCFPreferencesCurrentApplication);
+    bool got = false;
+    if (EXCEPTIONS && CFGetTypeID(EXCEPTIONS) == CFArrayGetTypeID()) {
+        got = (int)CFArrayGetCount(EXCEPTIONS);
+    }
+
+    return got;
 }
 
 static bool getIntPreference(CFStringRef key, int *valuePtr)
@@ -77,6 +96,9 @@ int main(void)
     if (!TRUSTED)
         CFRunLoopRun();
     CFNotificationCenterRemoveObserver(center, &observer, AX_NOTIFICATION, NULL);
+
+    if (!getExceptionApps(CFSTR("except")))
+        EXCEPTIONS = CFArrayCreate(kCFAllocatorDefault, NULL, 0, &kCFTypeArrayCallBacks);
 
     if (!getIntPreference(CFSTR("lines"), &LINES))
         LINES = DEFAULT_LINES;
