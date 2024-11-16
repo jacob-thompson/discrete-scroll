@@ -50,16 +50,16 @@ This number may even be negative, which inverts scrolling direction.
 defaults write com.emreyolcu.DiscreteScroll lines -int LINES
 ```
 
-You may configure exception applications if you do not want to run DiscreteScroll on every application. Running this command repeatedly will append its arguments to the existing list of exception applications. Replace `APPLICATION` with the name of the exception application you would like to configure, e.g. `Finder`.
-```
-defaults write com.emreyolcu.DiscreteScroll except -array-add "APPLICATION" "APPLICATION"
-```
-
 > [!WARNING]
 > If you set `lines` to some value other than an integer,
 > then the default value of 3 is used as a fallback.
 
-You should restart the application for the setting to take effect.
+You may configure exception applications if you do not want DiscreteScroll to run on every application. Running this command repeatedly will append its arguments to the existing list of exception applications. Replace `APPLICATION` with the name of the exception application you would like to configure, e.g. `Finder`.
+```
+defaults write com.emreyolcu.DiscreteScroll except -array-add "APPLICATION"
+```
+
+You should restart the application for changes in settings to take effect.
 
 ### Uninstallation
 
